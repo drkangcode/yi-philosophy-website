@@ -1,52 +1,69 @@
-生生之谓易：变局中的生存哲学交互式应用
+<div align="center">
 
-Yi & The Philosophy of Survival: Resilience in Chaos
+# 🌊 易 · 生存哲学交互系统
+### Yi: The Philosophy of Survival & Resilience
 
-这是一项基于《周易》“生生之谓易”核心思想的交互式数字研究项目。本项目将中国古典哲学中的“易”转化为一套现代生存算法与韧性模型，探讨生命在面临挑战性变局或毁灭性变故时，如何通过“非常道”保障生存安全并实现持续发展。
+> **"生生之谓易"** —— 在毁灭性的变局中，建立反脆弱的生存机制。
 
-📖 核心理念
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tech Stack](https://img.shields.io/badge/Tech-Tailwind%20%7C%20Chart.js-blue)]()
+[![Build Status](https://img.shields.io/badge/Status-Live-green)]()
 
-“生生之谓易，即是在挑战性的变局或者毁灭性的变故面前，易是能够保障生存安全与发展持续，是在‘使生得以生’。”
+[**🚀 立即体验交互系统 (Live Demo)**](https://drkangcode.github.io/yi-philosophy-website/)
 
-本项目旨在通过数字化交互手段，呈现以下哲学内涵：
+</div>
 
-生存保障：在极端环境下的系统自愈与保护机制。
+---
 
-生机增强：如何在变局中保存并增强生命活力。
+## 📖 项目简介 (Introduction)
 
-非常之道：超越常规逻辑的应对本领，化危机为生机。
+本项目是一个**单页面交互式网络应用 (SPA)**，旨在通过现代数据可视化技术，解构《周易》中深奥的生存哲学。
 
-🚀 核心功能
+我们不谈玄学，而是将“易”视为一套**动态的算法**。在充满不确定性（熵增）的系统中，本项目模拟了生命体如何通过“非常道”（非线性策略）来对抗外部冲击，从而实现“生生不息”。
 
-1. 变局韧性模型 (Resilience Analysis)
+### 核心探究问题：
+1.  **生存基线**：在环境剧烈震荡时，为何有的系统崩溃，有的系统反而更强？
+2.  **非常道**：常规逻辑（常道）失效时，如何启动应急与再生机制？
+3.  **生机量化**：如何用数据直观呈现“生机（Vitality）”的保存与增强？
 
-通过交互式折线图（Chart.js 驱动），模拟不同“变局烈度”下，常规应对系统与易之应对系统的生存指数表现，直观展示“易”在应对毁灭性变故时的动态平衡能力。
+---
 
-2. “非常道”策略雷达 (Mechanism Mapping)
+## ⚡️ 核心功能与交互 (Features)
 
-对比分析常道与易道在灵活性、再生力、预见性等维度的表现差异。用户可通过交互点击，深度了解如何通过“变通”与“知几”实现非线性生存。
+本项目包含三个高度耦合的交互模块，分别对应认知的三个层面：
 
-3. 生机能量实验室 (Survival Simulation)
+### 1. 📊 变局分析仪表盘 (The Resilience Dashboard)
+* **可视化引擎**：基于 `Chart.js` 的动态折线图。
+* **交互逻辑**：拖动滑块调整“变局烈度（Chaos Level）”。
+* **观察点**：直观对比“普通系统”随环境恶化而衰减，与“易之系统”在动荡中维持动态平衡的差异。
 
-一个简易的系统动力学模拟环境。用户可以触发“外部冲击”或“结构性崩塌”等事件，并尝试运用“变通”与“生生”策略来修复系统生机值，体验哲学理论在实战环境下的运用。
+### 2. 🕸 策略维度雷达 (Strategy Radar)
+* **可视化引擎**：交互式雷达图。
+* **数据对比**：
+    * 🔴 **常规系统**：侧重刚性结构、资源消耗。
+    * 🟢 **易之系统**：侧重灵活性、再生力、预见性。
+* **核心洞察**：展示了“柔弱胜刚强”的数据化解释。
 
-🛠️ 技术实现
+### 3. 🎮 生存模拟实验室 (Survival Simulation)
+* **交互引擎**：原生 JS 编写的状态机。
+* **玩法**：你将扮演系统管理者。
+    * ⚠️ **遭遇**：外部冲击（Shock）、结构崩塌（Collapse）。
+    * 🛡 **应对**：使用“变通（Adapt）”回避伤害，使用“生生（Regenerate）”重塑根基。
+* **目标**：在能量耗尽前，领悟“易”的生存节奏。
 
-前端架构：单文件 SPA (Single Page Application)
+---
 
-样式引擎：Tailwind CSS (响应式布局、传统美学配色)
+## 🛠 技术架构 (Tech Stack)
 
-数据可视化：Chart.js (动态生存曲线、策略雷达图)
+本项目追求**极简主义**与**高性能**，无复杂的构建流程，开箱即用。
 
-交互逻辑：原生 JavaScript 实现的状态管理与事件模拟
+* **Core**: HTML5 + Vanilla JavaScript (ES6+)
+* **Styling**: [Tailwind CSS](https://tailwindcss.com/) (CDN加载，无需编译)
+* **Visualization**: [Chart.js](https://www.chartjs.org/) (Canvas 渲染)
+* **Typography**: Noto Serif SC (Google Fonts) 营造东方学术美感
 
-🌐 在线访问
-
-本项目已部署于 GitHub Pages，您可以直接通过以下链接访问交互版本：
-
-👉 点击进入交互应用
-(请在 GitHub Settings > Pages 中开启服务后替换此链接)
-
-⚖️ 许可证
-
-本项目采用 MIT License 许可协议。
+```text
+.
+├── index.html       # 核心入口（包含所有逻辑、样式与结构）
+├── README.md        # 项目说明文档
+└── LICENSE          # MIT 开源协议
