@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易与生存哲学：变局中的韧性机制</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Custom Font Import (Simulating Traditional Aesthetic) */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F9F7F2; /* Warm Rice Paper */
+            color: #2D2D2D; /* Soft Ink Black */
+        }
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Subtle Transitions */
+        .transition-all-custom {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1EFE9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C4B5A0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A3937B;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals & Earth Tones -->
+    <!-- Primary Background: #F9F7F2 (Rice Paper) -->
+    <!-- Text: #2D2D2D (Ink) -->
+    <!-- Accent 1: #6B8E23 (Olive Drab - Life/Vitality) -->
+    <!-- Accent 2: #8B4513 (Saddle Brown - Stability) -->
+    <!-- Accent 3: #CD853F (Peru - Change) -->
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Application Structure Plan:
+         1. Header: Conceptual introduction ("Sheng Sheng zhi wei Yi").
+         2. Analytical Dashboard (Section 1): Visualizing "Bian Ju" (Crisis) vs. "Yi" (Resilience). Using a line chart to show stability over time under stress.
+         3. Core Mechanisms (Section 2): Interactive cards detailing "Protection", "Growth", and "Extraordinary Means".
+         4. Strategic Simulation (Section 3): A gamified model where users apply "Yi" strategies to restore "Life Energy" in a crisis scenario.
+         5. Synthesis/Footer: Academic summary.
+         Why: This structure moves from abstract definition to concrete visualization, then to granular mechanics, and finally to interactive application, aiding deep understanding of the philosophical text.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Line Chart (Stability Analysis): Goal: Compare normal survival vs. "Yi" enhanced survival in chaos. Method: Chart.js Line.
+         2. Interactive Cards (Mechanisms): Goal: Explain the 3 core functions (Protect, Preserve, Enhance). Interaction: Click to expand details. Method: HTML/Tailwind/JS.
+         3. Radar Chart (The "Fei Chang Dao" Approach): Goal: Compare standard logic vs. "Extraordinary Way". Method: Chart.js Radar.
+         4. Energy Gauge (Simulation): Goal: Show the impact of "Yi" on vitality. Method: CSS width bars + JS logic.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#F9F7F2]/95 backdrop-blur-sm border-b border-[#E5E0D6] shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-[#8B4513] serif-font tracking-wide">易 · 生存</span>
+                </div>
+                <div class="hidden sm:flex items-center space-x-8 text-sm font-medium text-[#5A5A5A]">
+                    <a href="#intro" class="hover:text-[#6B8E23] transition-colors">核心理念</a>
+                    <a href="#analysis" class="hover:text-[#6B8E23] transition-colors">变局分析</a>
+                    <a href="#mechanism" class="hover:text-[#6B8E23] transition-colors">运作机制</a>
+                    <a href="#simulation" class="hover:text-[#6B8E23] transition-colors">生存模拟</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center sm:hidden">
+                    <button id="mobile-menu-btn" class="text-[#5A5A5A] hover:text-[#8B4513] focus:outline-none">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden sm:hidden border-t border-[#E5E0D6] bg-[#F9F7F2] pb-4">
+                <a href="#intro" class="block px-4 py-2 text-sm text-[#5A5A5A] hover:bg-[#F1EFE9]">核心理念</a>
+                <a href="#analysis" class="block px-4 py-2 text-sm text-[#5A5A5A] hover:bg-[#F1EFE9]">变局分析</a>
+                <a href="#mechanism" class="block px-4 py-2 text-sm text-[#5A5A5A] hover:bg-[#F1EFE9]">运作机制</a>
+                <a href="#simulation" class="block px-4 py-2 text-sm text-[#5A5A5A] hover:bg-[#F1EFE9]">生存模拟</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section: The Definition -->
+    <section id="intro" class="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#F9F7F2] to-[#F1EFE9]">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-[#2D2D2D] mb-6 tracking-tight serif-font">
+                生生之谓易
+            </h1>
+            <p class="text-xl sm:text-2xl text-[#6B8E23] font-medium mb-8 serif-font">
+                “使生得以生，使生机得以保存”
+            </p>
+            <div class="prose prose-lg mx-auto text-[#5A5A5A] leading-relaxed max-w-2xl">
+                <p>
+                    在挑战性的变局或毁灭性的变故面前，<span class="font-bold text-[#8B4513]">“易”</span>不仅是变化的规律，更是保障生存安全与发展持续的核心能力。它通过“非常道”来应对非常之势，是生命力的终极护盾。
+                </p>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-[#E5E0D6] hover:shadow-md transition-all-custom">
+                    <div class="text-3xl mb-3 text-[#8B4513]">🛡️</div>
+                    <h3 class="text-lg font-bold mb-2">保障生存</h3>
+                    <p class="text-sm text-gray-600">在毁灭性变故中建立安全屏障。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-[#E5E0D6] hover:shadow-md transition-all-custom">
+                    <div class="text-3xl mb-3 text-[#6B8E23]">🌱</div>
+                    <h3 class="text-lg font-bold mb-2">增强生机</h3>
+                    <p class="text-sm text-gray-600">保存活力，使生命得以支撑与延续。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-[#E5E0D6] hover:shadow-md transition-all-custom">
+                    <div class="text-3xl mb-3 text-[#CD853F]">⚡</div>
+                    <h3 class="text-lg font-bold mb-2">应对变局</h3>
+                    <p class="text-sm text-gray-600">通过“非常道”化解危机，实现发展。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Analysis - Crisis vs. Resilience -->
+    <section id="analysis" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-10 text-center md:text-left">
+                <h2 class="text-3xl font-bold text-[#2D2D2D] mb-4 serif-font">变局分析：韧性曲线</h2>
+                <p class="text-gray-600 max-w-3xl">
+                    本部分将抽象的“变局”概念转化为数据模型。通过下方图表，我们可以直观地看到在外部环境剧烈波动（挑战性变局）时，具备“易”之智慧的系统如何维持比普通系统更高的生存基线。
+                    <br><span class="text-sm text-[#6B8E23] mt-2 block">交互提示：拖动滑块调整外部环境的“动荡程度”，观察生存曲线的变化。</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <!-- Controls -->
+                <div class="bg-[#F9F7F2] p-6 rounded-xl border border-[#E5E0D6] shadow-sm">
+                    <h3 class="text-lg font-bold text-[#8B4513] mb-6 border-b border-[#E5E0D6] pb-2">环境参数设定</h3>
+                    
+                    <div class="mb-6">
+                        <label for="chaosLevel" class="block text-sm font-medium text-gray-700 mb-2">
+                            变局烈度 (Chaos Level): <span id="chaosValue" class="font-bold text-[#CD853F]">50%</span>
+                        </label>
+                        <input type="range" id="chaosLevel" min="0" max="100" value="50" class="w-full h-2 bg-[#E5E0D6] rounded-lg appearance-none cursor-pointer accent-[#8B4513]">
+                        <p class="text-xs text-gray-500 mt-2">增加烈度模拟“毁灭性变故”。</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-[#E5E5E5] mr-2"></span>
+                            <span class="text-sm text-gray-600">普通应对 (常道): 随环境波动剧烈</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-[#6B8E23] mr-2"></span>
+                            <span class="text-sm text-gray-800 font-medium">易之应对 (非常道): 动态平衡</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-white p-4 rounded-lg text-sm text-gray-600 border border-[#E5E0D6]">
+                        <strong>分析结论：</strong><br>
+                        当变局烈度超过阈值时，唯有“易”能通过非线性适应（非常道）保障生存安全，防止系统崩溃。
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-sm border border-[#E5E0D6] p-4">
+                        <div class="chart-container">
+                            <canvas id="resilienceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Mechanism - The "Extraordinary Way" -->
+    <section id="mechanism" class="py-16 px-4 sm:px-6 lg:px-8 bg-[#F9F7F2]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#2D2D2D] mb-4 serif-font">运作机制：非常道</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    “易”之所以能“使生得以生”，在于它采用了区别于常规逻辑的“非常道”。本图表对比了在极端环境下，常规策略与“易”之策略的多维效能。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Radar Chart -->
+                <div class="order-2 md:order-1">
+                    <div class="bg-white rounded-xl shadow-sm border border-[#E5E0D6] p-6">
+                        <div class="chart-container">
+                            <canvas id="strategyRadar"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Textual Analysis -->
+                <div class="order-1 md:order-2 space-y-6">
+                    <div class="bg-white p-5 rounded-lg border-l-4 border-[#8B4513] shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="highlightRadar('flexibility')">
+                        <h3 class="text-lg font-bold text-[#2D2D2D] flex justify-between">
+                            <span>1. 灵活性 (Flexibility)</span>
+                            <span class="text-xs bg-[#F1EFE9] px-2 py-1 rounded text-[#8B4513]">关键差异</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm mt-2">常道追求稳固不变，易则追求“唯变所适”。在变故中，刚者易折，柔者生存。</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg border-l-4 border-[#6B8E23] shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="highlightRadar('regeneration')">
+                        <h3 class="text-lg font-bold text-[#2D2D2D] flex justify-between">
+                            <span>2. 再生力 (Regeneration)</span>
+                            <span class="text-xs bg-[#F1EFE9] px-2 py-1 rounded text-[#6B8E23]">生生之谓易</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm mt-2">常道消耗存量资源对抗危机，易则转化危机为生机，实现能量的自我循环与增强。</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg border-l-4 border-[#CD853F] shadow-sm cursor-pointer hover:bg-gray-50 transition-colors" onclick="highlightRadar('vision')">
+                        <h3 class="text-lg font-bold text-[#2D2D2D] flex justify-between">
+                            <span>3. 预见性 (Foresight)</span>
+                            <span class="text-xs bg-[#F1EFE9] px-2 py-1 rounded text-[#CD853F]">知几</span>
+                        </h3>
+                        <p class="text-gray-600 text-sm mt-2">常道被动响应，易则洞察微小的变化苗头（几），提前布局，化解由于无形。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Simulation - The Life Energy Model -->
+    <section id="simulation" class="py-16 px-4 sm:px-6 lg:px-8 bg-white border-t border-[#E5E0D6]">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-[#2D2D2D] mb-4 serif-font">生存模拟实验室</h2>
+                <p class="text-gray-600">
+                    在此互动模型中，你的系统正面临持续的外部冲击。请尝试运用“易”的策略来维持“生机值”。<br>
+                    <span class="text-sm font-bold text-[#8B4513]">目标：保持生机值在 0 以上。</span>
+                </p>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="bg-[#F9F7F2] rounded-2xl p-6 md:p-8 border border-[#E5E0D6] shadow-lg">
+                <!-- Status Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="text-lg font-bold text-[#2D2D2D]">当前生机值 (Vitality)</span>
+                        <span id="lifeValueDisplay" class="text-2xl font-bold text-[#6B8E23]">100%</span>
+                    </div>
+                    <div class="w-full h-6 bg-[#E5E0D6] rounded-full overflow-hidden relative">
+                        <!-- Threshold marker -->
+                        <div class="absolute left-[20%] top-0 bottom-0 w-0.5 bg-red-400 z-10" title="危险线"></div>
+                        <div id="lifeBar" class="h-full bg-gradient-to-r from-[#8B4513] to-[#6B8E23] transition-all duration-500 ease-out" style="width: 100%;"></div>
+                    </div>
+                    <p id="statusText" class="text-sm text-center mt-3 text-gray-500 italic">系统状态：平稳运行</p>
+                </div>
+
+                <!-- Event Log -->
+                <div id="eventLog" class="h-32 bg-white border border-[#E5E0D6] rounded-lg p-3 overflow-y-auto mb-6 text-sm text-gray-600 font-mono shadow-inner">
+                    <div class="text-gray-400">>> 系统初始化完成...</div>
+                    <div class="text-gray-400">>> 等待指令...</div>
+                </div>
+
+                <!-- Controls Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Threats -->
+                    <div class="space-y-3">
+                        <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider">遭遇变故 (Challenge)</h4>
+                        <button onclick="triggerEvent('shock')" class="w-full py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🌊</span> 外部冲击 (Shock)
+                        </button>
+                        <button onclick="triggerEvent('chaos')" class="w-full py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition flex items-center justify-center gap-2 shadow-sm">
+                            <span>🌪️</span> 结构性崩塌 (Collapse)
+                        </button>
+                    </div>
+
+                    <!-- Yi Responses -->
+                    <div class="space-y-3">
+                        <h4 class="text-sm font-bold text-[#6B8E23] uppercase tracking-wider">易之应对 (Yi Response)</h4>
+                        <button onclick="triggerResponse('adapt')" class="w-full py-3 bg-[#6B8E23] text-white rounded-lg hover:bg-[#556B2F] transition flex items-center justify-center gap-2 shadow-md">
+                            <span>🔄</span> 变通 (Adaptation)
+                        </button>
+                        <button onclick="triggerResponse('regenerate')" class="w-full py-3 bg-[#8B4513] text-white rounded-lg hover:bg-[#66330E] transition flex items-center justify-center gap-2 shadow-md">
+                            <span>🌱</span> 生生 (Regeneration)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2D2D2D] text-[#E5E0D6] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold serif-font mb-4">学术结语</h3>
+                    <p class="text-sm opacity-80 leading-relaxed">
+                        “易”并非单纯的占卜或形而上学，而是一套深邃的生存算法。在熵增的宇宙与充满不确定性的人类社会中，它提供了关于如何在毁灭边缘保持“生”之活力的终极智慧。透过非常道，我们得以在变局中不仅幸存，更能进化。
+                    </p>
+                </div>
+                <div class="md:text-right flex flex-col justify-end">
+                    <p class="text-sm opacity-60">基于“生生之谓易”哲学思想构建</p>
+                    <p class="text-xs opacity-40 mt-1">Interactive Research SPA © 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Navigation Logic ---
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // --- Chart 1: Resilience Curve (Line Chart) ---
+        // Context: Comparing a fragile system vs. an antifragile (Yi) system under stress.
+        const ctxResilience = document.getElementById('resilienceChart').getContext('2d');
+        
+        // Generate initial data
+        function generateData(chaos) {
+            const points = 10;
+            const labels = Array.from({length: points}, (_, i) => `T${i+1}`);
+            
+            // Standard Path: Degrades as chaos increases
+            const standardData = labels.map((_, i) => {
+                let base = 80;
+                let decay = (chaos / 100) * 5 * i; 
+                let volatility = (Math.random() - 0.5) * (chaos / 5);
+                return Math.max(0, base - decay + volatility);
+            });
+
+            // Yi Path: Adapts and maintains stability
+            const yiData = labels.map((_, i) => {
+                let base = 85;
+                // Yi uses chaos to grow initially or maintain (Anti-fragile concept)
+                let adaptation = (chaos / 100) * 2 * Math.sin(i); 
+                let stability = base + adaptation;
+                return Math.max(10, stability);
+            });
+
+            return { labels, standardData, yiData };
+        }
+
+        let currentChaos = 50;
+        const initialData = generateData(currentChaos);
+
+        const resilienceChart = new Chart(ctxResilience, {
+            type: 'line',
+            data: {
+                labels: initialData.labels,
+                datasets: [
+                    {
+                        label: '易之应对 (Yi Strategy)',
+                        data: initialData.yiData,
+                        borderColor: '#6B8E23', // Green
+                        backgroundColor: 'rgba(107, 142, 35, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '常道 (Standard Path)',
+                        data: initialData.standardData,
+                        borderColor: '#A0A0A0', // Grey
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.2,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { usePointStyle: true, font: { family: "'Noto Sans SC', sans-serif" } }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(45, 45, 45, 0.9)',
+                        titleFont: { family: "'Noto Serif SC', serif" },
+                        bodyFont: { family: "'Noto Sans SC', sans-serif" },
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': 生存指数 ' + Math.round(context.raw);
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '生存指数随时间变化 (Survival Index over Time)',
+                        font: { size: 16, family: "'Noto Serif SC', serif" },
+                        color: '#2D2D2D'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 120,
+                        title: { display: true, text: '生存指数 (Survival Index)' },
+                        grid: { color: '#E5E0D6' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Slider Interaction
+        const slider = document.getElementById('chaosLevel');
+        const chaosValue = document.getElementById('chaosValue');
+
+        slider.addEventListener('input', (e) => {
+            currentChaos = parseInt(e.target.value);
+            chaosValue.textContent = currentChaos + '%';
+            
+            const newData = generateData(currentChaos);
+            resilienceChart.data.datasets[0].data = newData.yiData;
+            resilienceChart.data.datasets[1].data = newData.standardData;
+            resilienceChart.update();
+        });
+
+        // --- Chart 2: Strategy Radar ---
+        // Context: Qualitative comparison of attributes.
+        const ctxRadar = document.getElementById('strategyRadar').getContext('2d');
+        const strategyRadar = new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['灵活性 (Flexibility)', '再生力 (Regeneration)', '预见性 (Foresight)', '结构强度 (Rigidity)', '资源消耗 (Resource Use)'],
+                datasets: [{
+                    label: '易之系统 (Yi System)',
+                    data: [90, 95, 85, 40, 30],
+                    fill: true,
+                    backgroundColor: 'rgba(107, 142, 35, 0.2)',
+                    borderColor: '#6B8E23',
+                    pointBackgroundColor: '#6B8E23',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#6B8E23'
+                }, {
+                    label: '常规系统 (Normal System)',
+                    data: [40, 30, 40, 90, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(139, 69, 19, 0.2)',
+                    borderColor: '#8B4513',
+                    pointBackgroundColor: '#8B4513',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#8B4513'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E5E0D6' },
+                        grid: { color: '#E5E0D6' },
+                        pointLabels: {
+                            font: { size: 12, family: "'Noto Sans SC', sans-serif" },
+                            color: '#5A5A5A'
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Radar Interaction highlighting
+        window.highlightRadar = function(feature) {
+            // Reset colors
+            strategyRadar.data.datasets[0].backgroundColor = 'rgba(107, 142, 35, 0.2)';
+            
+            // Subtle highlight effect logic (re-rendering for simplicity in this context)
+            // In a more complex app, we might highlight specific indices.
+            // Here we just trigger an update animation to draw attention.
+            strategyRadar.update();
+        };
+
+        // --- Simulation Logic ---
+        let lifeEnergy = 100;
+        const maxEnergy = 100;
+        const lifeBar = document.getElementById('lifeBar');
+        const lifeDisplay = document.getElementById('lifeValueDisplay');
+        const eventLog = document.getElementById('eventLog');
+        const statusText = document.getElementById('statusText');
+
+        function addLog(msg, type = 'neutral') {
+            const div = document.createElement('div');
+            const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+            div.textContent = `[${time}] ${msg}`;
+            
+            if (type === 'danger') div.className = 'text-red-600 font-bold';
+            else if (type === 'success') div.className = 'text-green-700 font-bold';
+            else div.className = 'text-gray-600';
+
+            eventLog.insertBefore(div, eventLog.firstChild);
+        }
+
+        function updateUI() {
+            lifeBar.style.width = `${Math.max(0, Math.min(100, lifeEnergy))}%`;
+            lifeDisplay.textContent = `${Math.round(lifeEnergy)}%`;
+            
+            // Color logic
+            if (lifeEnergy > 60) {
+                lifeBar.className = 'h-full bg-gradient-to-r from-[#8B4513] to-[#6B8E23] transition-all duration-500 ease-out';
+                statusText.textContent = "系统状态：生机勃勃 (Thriving)";
+                statusText.className = "text-sm text-center mt-3 text-green-700 font-bold";
+            } else if (lifeEnergy > 20) {
+                lifeBar.className = 'h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-500 ease-out';
+                statusText.textContent = "系统状态：面临挑战 (Challenged)";
+                statusText.className = "text-sm text-center mt-3 text-yellow-700 font-bold";
+            } else {
+                lifeBar.className = 'h-full bg-gradient-to-r from-red-700 to-red-500 transition-all duration-500 ease-out';
+                statusText.textContent = "系统状态：濒临崩溃 (Critical)";
+                statusText.className = "text-sm text-center mt-3 text-red-600 font-bold animate-pulse";
+            }
+        }
+
+        window.triggerEvent = function(type) {
+            let damage = 0;
+            let msg = "";
+
+            if (type === 'shock') {
+                damage = 15;
+                msg = "外部冲击！生机受损。";
+            } else if (type === 'chaos') {
+                damage = 35;
+                msg = "严重变故！结构性崩塌风险。";
+            }
+
+            lifeEnergy = Math.max(0, lifeEnergy - damage);
+            addLog(msg, 'danger');
+            updateUI();
+        };
+
+        window.triggerResponse = function(type) {
+            let recovery = 0;
+            let msg = "";
+
+            if (lifeEnergy <= 0 && type !== 'regenerate') {
+                addLog("系统已崩溃，普通手段无效！", 'danger');
+                return;
+            }
+
+            if (type === 'adapt') {
+                // Adapt works better when energy is moderate
+                recovery = 10;
+                msg = "变通策略生效：回避直接冲击。";
+            } else if (type === 'regenerate') {
+                // The "Yi" way - works best when crisis is high (Resilience)
+                if (lifeEnergy < 30) {
+                    recovery = 40; // Massive boost in crisis (Antifragility)
+                    msg = "易之奥义：绝处逢生！生机大幅回涌。";
+                } else {
+                    recovery = 15;
+                    msg = "生生不息：稳固基础。";
+                }
+            }
+
+            lifeEnergy = Math.min(maxEnergy, lifeEnergy + recovery);
+            addLog(msg, 'success');
+            updateUI();
+        };
+
+    </script>
+    
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</body>
+</html>
